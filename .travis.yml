@@ -1,3 +1,5 @@
 arch:
   - arm64  # please note arm64-graviton2 requires explicit virt: [lxd|vm] tag so it's recommended for jobs.include, see below
 os: linux  # different CPU architectures are only supported on Linux
+
+dist: focal
