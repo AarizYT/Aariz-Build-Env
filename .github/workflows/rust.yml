@@ -29,7 +29,6 @@ jobs:
           cd psst
           sed -i 's/PRODUCT_PARTNER/PRODUCT_CLIENT/g' psst-core/src/connection/mod.rs
           mkdir ~/.cargo
-          mount -t tmpfs -o size=2048m tmpfs ~/.cargo
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           git submodule update --recursive --init
           PATH=$PATH:~/.cargo/bin cargo build
