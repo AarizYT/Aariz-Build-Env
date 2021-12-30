@@ -19,8 +19,8 @@ jobs:
       uses: uraimo/run-on-arch-action@v1.0.7
       id: runcmd
       with:
-        architecture: aarch64
-        distribution: buster
+        arch: aarch64
+        distro: buster
         run: |
           sudo apt-get update && apt-get install git libssl-dev libgtk-3-dev libcairo2-dev libasound2-dev -y
           mkdir -p ~
