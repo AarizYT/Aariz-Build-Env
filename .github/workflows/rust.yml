@@ -1,4 +1,4 @@
-name: Rust
+name: psst-aarch64-build
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         arch: aarch64
         distro: ubuntu20.04
         run: |
-          apt-get update && apt-get install curl git libssl-dev libgtk-3-dev libcairo2-dev libasound2-dev -y
+          apt-get update && apt-get install build-essential curl git libssl-dev libgtk-3-dev libcairo2-dev libasound2-dev -y
           mkdir -p ~
           git clone https://github.com/jpochyla/psst.git
           cd psst
