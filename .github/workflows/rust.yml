@@ -13,7 +13,7 @@ jobs:
   gnu_linux_aarch64:
     runs-on: ubuntu-latest
     continue-on-error: true
-    name: Build on ubuntu-20.04 aarch64
+    name: Build on Ubuntu-20.04 aarch64
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
@@ -38,7 +38,7 @@ jobs:
     - name: Get the output
       if: always()
       run: |
-          cd ..
+          cd psst
           gzip --best target/
           echo ::set-output name=data::$(base64 bin/psst.gz)
           mkdir bin
