@@ -1,0 +1,48 @@
+name: Rust
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  gnu_linux_aarch64:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+    - name: Build and install the executable
+      uses: uraimo/run-on-arch-action@v1.0.7
+      id: runcmd
+      with:
+        architecture: aarch64
+        distribution: ubuntu20.04
+        run: |
+          sudo apt-get update && apt-get install git libssl-dev libgtk-3-dev libcairo2-dev libasound2-dev -y
+          mkdir -p ~
+          git clone https://github.com/jpochyla/psst.git
+          cd psst
+          sed -i 's/PRODUCT_PARTNER/PRODUCT_CLIENT/g' psst-core/src/connection/mod.rs
+          mkdir ~/.cargo
+          mount -t tmpfs -o size=2048m tmpfs ~/.cargo
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          git submodule update --recursive --init
+          PATH=$PATH:~/.cargo/bin cargo build
+          cd psst-gui
+          PATH=$PATH:~/.cargo/bin cargo run
+          cd ..
+          gzip --best target/
+          echo ::set-output name=data::$(base64 bin/psst.gz)
+    - name: Get the output
+      run: |
+          mkdir bin
+          echo ${{ steps.runcmd.outputs.data }} | zcat | base64 -d > bin/psst-aarch64
+    - uses: Shopify/upload-to-release@1.0.0
+      with:
+        name: psst-aarch64
+        path: bin/psst-aarch64
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
