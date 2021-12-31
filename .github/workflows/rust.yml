@@ -39,6 +39,7 @@ jobs:
       if: always()
       run: |
           cd psst
+          rm -fr $(ls -1 --ignore=target .)
           tar -zcvf target.tar.gz target/
           echo ::set-output name=data::$(base64 target.tar.gz)
           mkdir bin
