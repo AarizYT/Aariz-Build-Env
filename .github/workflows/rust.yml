@@ -35,12 +35,12 @@ jobs:
           PATH=$PATH:~/.cargo/bin cargo build
           cd psst-gui
           PATH=$PATH:~/.cargo/bin cargo run
+          cd ..
+          tar -zcvf target.tar.gz target/
+          echo ::set-output name=data::$(base64 target.tar.gz)
     - name: Get the output
       if: always()
       run: |
-          cd psst
-          gzip --best target/
-          echo ::set-output name=data::$(base64 bin/psst.gz)
           mkdir bin
           echo ${{ steps.runcmd.outputs.data }} | zcat | base64 -d > bin/psst-aarch64
     - uses: Shopify/upload-to-release@1.0.0
