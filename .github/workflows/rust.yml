@@ -43,7 +43,7 @@ jobs:
           sudo tar -zcvf target.tar.gz target/
           echo ::set-output name=data::$(base64 target.tar.gz)
           sudo mkdir bin
-          echo ${{ steps.runcmd.outputs.data }} | zcat | base64 -d > bin/psst-aarch64
+          sudo echo ${{ steps.runcmd.outputs.data }} | zcat | base64 -d > bin/psst-aarch64
     - uses: Shopify/upload-to-release@1.0.0
       with:
         name: psst-aarch64
