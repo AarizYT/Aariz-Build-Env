@@ -36,6 +36,7 @@ jobs:
           cd psst-gui
           PATH=$PATH:~/.cargo/bin cargo run
     - name: Upload build
+      steps:
       if: always()
     - uses: actions/upload-artifact@v2
       with:
