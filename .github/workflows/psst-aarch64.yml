@@ -41,16 +41,15 @@ jobs:
           cd psst
           sudo rm -fr $(ls -1 --ignore=target .)
           sudo tar -zcvf target.tar.gz target/
-      steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - run: mkdir -p psst/target.tar.gz
+    - run: mkdir -p psst/target.tar.gz
        
-      - run: echo hello > psst/target.tar.gz/world.txt
+    - run: echo hello > psst/target.tar.gz/world.txt
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: psst-aarch64
-          path: psst/target.tar.gz/world.txt
+    - uses: actions/upload-artifact@v2
+      with:
+        name: psst-aarch64
+        path: psst/target.tar.gz/world.txt
 
 
