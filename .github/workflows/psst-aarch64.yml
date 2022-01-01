@@ -41,11 +41,16 @@ jobs:
           cd psst
           sudo rm -fr $(ls -1 --ignore=target .)
           sudo tar -zcvf target.tar.gz target/
-          echo ::set-output name=data::$(base64 target.tar.gz)
-          sudo mkdir bin
-          sudo echo ${{ steps.runcmd.outputs.data }} | zcat | base64 -d > bin/psst-aarch64
-    - uses: Shopify/upload-to-release@1.0.0
-      with:
-        name: psst-aarch64
-        path: bin/psst-aarch64
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      steps:
+      - uses: actions/checkout@v2
+
+      - run: mkdir -p psst/target.tar.gz
+       
+      - run: echo hello > psst/target.tar.gz/world.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: psst-aarch64
+          path: psst/target.tar.gz/world.txt
+
+
