@@ -40,6 +40,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         run: | 
-          chmod 777 psst/*
+          sudo rm -rf /home/runner/work/Aariz-Build-Env/Aariz-Build-Env/psst/target/debug/incremental/build_script_build-*/*.lock
         name: psst-aarch64
         path: psst/target/ # or path/to/artifact
