@@ -39,5 +39,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
+        run: | 
+          chmod 777 psst/*
         name: psst-aarch64
         path: psst/target/ # or path/to/artifact
