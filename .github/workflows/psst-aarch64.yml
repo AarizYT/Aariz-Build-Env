@@ -37,7 +37,7 @@ jobs:
           PATH=$PATH:~/.cargo/bin cargo run
     - name: Upload build
       if: always()
-    - uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: psst-aarch64
         path: psst/target/ # or path/to/artifact
