@@ -36,9 +36,11 @@ jobs:
           cd psst-gui
           PATH=$PATH:~/.cargo/bin cargo run
     - name: Tar files
+      if: always()
       run: sudo tar -cvzf psst-aarch64.tar.gz psst/target/
 
     - name: Upload Artifact
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: psst-aarch64
