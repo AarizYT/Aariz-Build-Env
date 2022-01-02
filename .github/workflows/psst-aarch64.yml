@@ -32,7 +32,7 @@ jobs:
           mkdir ~/.cargo
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           git submodule update --recursive --init
-          PATH=$PATH:~/.cargo/bin cargo build
+          PATH=$PATH:~/.cargo/bin cargo build --no-default-features --features pulseaudio-backend
           cd psst-gui
           PATH=$PATH:~/.cargo/bin cargo run
     - name: Tar files
