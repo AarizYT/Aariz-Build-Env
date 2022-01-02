@@ -26,9 +26,8 @@ jobs:
         run: |
           apt-get update && apt-get install build-essential curl git libssl-dev libgtk-3-dev libcairo2-dev libasound2-dev -y
           mkdir -p ~
-          git clone https://github.com/jpochyla/psst.git
+          git clone https://github.com/AarizYT/psst.git
           cd psst
-          sed -i 's/PRODUCT_PARTNER/PRODUCT_CLIENT/g' psst-core/src/connection/mod.rs
           mkdir ~/.cargo
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           git submodule update --recursive --init
