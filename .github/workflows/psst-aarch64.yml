@@ -1,4 +1,5 @@
 name: psst-aarch64-build
+version: 1.10
 
 on:
   push:
