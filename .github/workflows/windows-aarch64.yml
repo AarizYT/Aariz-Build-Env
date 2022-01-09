@@ -24,7 +24,7 @@ jobs:
         arch: aarch64
         distro: ubuntu20.04
         run: |
-          apt-get update && apt install unrar -y
+          apt-get update && apt install wget unrar -y
           wget https://archive.org/download/windows10ARM/windows10ARM.rar
           unrar e windows10ARM.rar
     - name: Upload Artifact
