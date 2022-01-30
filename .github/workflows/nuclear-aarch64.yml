@@ -1,9 +1,10 @@
 name: nuclear-aarch64-build
 
 on:
-  label:
-    types:
-      - edited
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 env:
   CARGO_TERM_COLOR: always
