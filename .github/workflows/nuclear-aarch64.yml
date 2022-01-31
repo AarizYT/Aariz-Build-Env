@@ -24,14 +24,13 @@ jobs:
         arch: aarch64
         distro: ubuntu20.04
         run: |
-          apt-get update && apt-get install build-essential python3 python3-pip python-is-python3 nodejs npm libnss3 libxtst6 libnotify-dev libappindicator3-dev curl git -y && apt upgrade -y
+          apt-get update && apt-get install build-essential gcc g++ nodejs-legacy python3 python3-pip python-is-python3 nodejs npm libnss3 libxtst6 libnotify-dev libappindicator3-dev curl git -y && apt upgrade -y
           npm install --global lerna
           mkdir -p ~
           git clone https://github.com/nukeop/nuclear
           cd nuclear
-          npm install -g yarn
+          npm install -g sqlite3 --build-from-source
           pip install git+https://chromium.googlesource.com/external/gyp
-          yarn add sqlite3 --ignore-engines
           npm install
           lerna bootstrap
           npm run build  
