@@ -33,8 +33,7 @@ jobs:
           if ! ls /usr/lib/node_modules; then mkdir /usr/lib/node_modules;fi
           sudo chown -R $(whoami) ~/.npm
           sudo chown -R $(whoami) /usr/lib/node_modules
-          mkdir -p mkdir /usr/local/lib/node_modules/sqlite3/build
-          npm install -g sqlite3 --build-from-source
+          npm install -g sqlite3
           pip install git+https://chromium.googlesource.com/external/gyp
           npm install
           lerna bootstrap
