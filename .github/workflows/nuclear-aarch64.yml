@@ -30,6 +30,7 @@ jobs:
           git clone https://github.com/nukeop/nuclear
           cd nuclear
           if ! ls ~/.npm; then mkdir ~/.npm;fi
+          if ! ls /usr/lib/node_modules; then mkdir /usr/lib/node_modules;fi
           sudo chown -R $(whoami) ~/.npm
           sudo chown -R $(whoami) /usr/lib/node_modules
           npm install -g sqlite3 --build-from-source
