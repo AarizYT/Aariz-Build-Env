@@ -25,19 +25,11 @@ jobs:
         distro: ubuntu20.04
         run: |
           apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install sudo build-essential gcc g++ python3 python3-pip python-is-python3 nodejs npm libnss3 libxtst6 libnotify-dev libappindicator3-dev curl git && DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" upgrade
-          npm install --global lerna
           mkdir -p ~
           git clone https://github.com/nukeop/nuclear
           cd nuclear
-          if ! ls ~/.npm; then mkdir ~/.npm;fi
-          if ! ls /usr/lib/node_modules; then mkdir /usr/lib/node_modules;fi
-          sudo chown -R $(whoami) ~/.npm
-          sudo chown -R $(whoami) /usr/lib/node_modules
-          sudo npm install -g sqlite3 --unsafe-perm=true --allow-root 
-          sudo pip install git+https://chromium.googlesource.com/external/gyp
           sudo npm install --allow-root
-          lerna bootstrap
-          npm run build  
+          npm run build:linux
     - name: Tar files
       if: always()
       run: sudo tar -cvzf nuclear-aarch64.tar.gz nuclear/
