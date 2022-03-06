@@ -24,7 +24,7 @@ jobs:
         arch: aarch64
         distro: ubuntu20.04
         run: |
-          apt-get update && apt-get install sudo build-essential gcc g++ python3 python3-pip python-is-python3 nodejs npm libnss3 libxtst6 libnotify-dev libappindicator3-dev curl git -y && apt upgrade -y
+          apt-get update && apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install sudo build-essential gcc g++ python3 python3-pip python-is-python3 nodejs npm libnss3 libxtst6 libnotify-dev libappindicator3-dev curl git -y && apt upgrade -y
           npm install --global lerna
           mkdir -p ~
           git clone https://github.com/nukeop/nuclear
