@@ -15,3 +15,6 @@ workflows:
   build:
     jobs:
       - build-medium
+
+- store_artifacts:
+          path: /home/circleci/.npm/_logs
