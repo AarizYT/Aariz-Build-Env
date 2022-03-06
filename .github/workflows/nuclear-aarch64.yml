@@ -34,8 +34,8 @@ jobs:
           sudo chown -R $(whoami) ~/.npm
           sudo chown -R $(whoami) /usr/lib/node_modules
           sudo npm install -g sqlite3 --unsafe-perm=true --allow-root 
-          pip install git+https://chromium.googlesource.com/external/gyp
-          npm install
+          sudo pip install git+https://chromium.googlesource.com/external/gyp
+          sudo npm install --allow-root
           lerna bootstrap
           npm run build  
     - name: Tar files
