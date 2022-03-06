@@ -11,7 +11,7 @@ jobs:
       - run: nvm install v12.0 && nvm alias default v12.0 && nvm use default
       - run: node --version && npm --version
       - run: git clone https://github.com/nukeop/nuclear
-      - run: cd nuclear && npm install latest-version && npm update && npm ci --loglevel verbose && npm run build:linux
+      - run: cd nuclear && npm ci --loglevel verbose && npm run build:linux
       - store_artifacts:
           path: /home/circleci/nuclear/npm-debug.log
           destination: debug.log
