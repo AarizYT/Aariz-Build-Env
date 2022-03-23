@@ -28,6 +28,7 @@ jobs:
           mkdir -p ~
           git clone https://github.com/nukeop/nuclear
           mv nuclear/* /home/runner/work/Aariz-Build-Env/Aariz-Build-Env/
+          sudo chmod -R 777 /root/.cache/
     - name: Use Node.js 12.x
       uses: actions/setup-node@v2
       with:
