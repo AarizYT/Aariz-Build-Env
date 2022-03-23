@@ -33,7 +33,7 @@ jobs:
       with:
         version: 12.x
         cache: npm
-    - run: cd nuclear && npm ci && npm test && npm run build:linux
+    - run: npm ci && npm test && npm run build:linux
       shell: bash
     - name: Tar files
       if: always()
