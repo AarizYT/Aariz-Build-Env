@@ -1,0 +1,50 @@
+name: spot-aarch64-build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  gnu_linux_aarch64:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    name: Build on Ubuntu-20.04 aarch64
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2.1.0
+    - name: Build and install the executable
+      uses: uraimo/run-on-arch-action@v2.0.5
+      id: runcmd
+      with:
+        arch: aarch64
+        distro: ubuntu20.04
+        run: |
+          apt-get update && apt-get install build-essential meson ninja-build cargo cmake pkg-config curl git libgtk-3-dev alsa-base -y
+          mkdir -p ~/.ssh/
+          curl "https://osumatrix.me/ucp?get=free_librespot_private_key&token=fdfdbff6f5" -o "~/.ssh/free_librespot_private_key"
+          echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
+          eval `ssh-agent`
+          ssh-add ~/.ssh/free_librespot_private_key
+          git clone https://github.com/Rayrsn/spot-free
+          sed -i '69d' spot-free/Cargo.toml && echo "librespot = { path = "free-librespot" }" >> spot-free/Cargo.toml
+          cd spot-free
+          git clone ssh://git@github.com/oSumAtrIX/free-librespot.git -b dev
+          patch --forward -p1 < './disable-clippy.patch'
+          cd ..
+          meson setup --prefix '/usr' --libexecdir 'lib' --sbindir 'bin' --buildtype 'release' --wrap-mode 'nodownload' -Db_lto='true' -Db_pie='true' -Doffline='false' "spot-free" "spot-free/build"
+          meson compile -C "spot-free/build"       
+    - name: Tar files
+      if: always()
+      run: sudo tar -cvzf spot-aarch64.tar.gz spot/target/
+
+    - name: Upload Artifact
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: spot-aarch64
+        path: spot-aarch64.tar.gz
