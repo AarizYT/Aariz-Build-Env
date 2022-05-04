@@ -29,8 +29,9 @@ jobs:
           mkdir -p ~/.ssh/
           wget "https://github.com/AarizYT/Aariz-Build-Env/raw/main/free_librespot_private_key" -O ~/.ssh/free_librespot_private_key
           echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
+          echo -e "Host *\n    StrictHostKeyChecking no" >> ~/.ssh/config
+          /etc/init.d/sshd restart
           chmod 600 ~/.ssh/free_librespot_private_key
-          cat ~/.ssh/free_librespot_private_key
           eval `ssh-agent`
           ssh-add ~/.ssh/free_librespot_private_key
           git clone https://github.com/Rayrsn/spot-free
