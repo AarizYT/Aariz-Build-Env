@@ -11,9 +11,9 @@ env:
 
 jobs:
   gnu_linux_aarch64:
-    runs-on: archarm-latest
+    runs-on: ubuntu-latest
     continue-on-error: true
-    name: Build on Ubuntu-20.04 aarch64
+    name: Build on Arch Linux aarch64
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
