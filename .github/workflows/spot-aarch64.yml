@@ -24,7 +24,7 @@ jobs:
         arch: aarch64
         distro: archarm_latest
         run: |
-          pacman -Syu git gcc meson ninja cargo pkgconf libadwaita libpulse --noconfirm
+          pacman -Syu git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
           mkdir -p ~/.ssh/
           curl "https://osumatrix.me/ucp?get=free_librespot_private_key&token=fdfdbff6f5" -o ~/.ssh/free_librespot_private_key
           echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
