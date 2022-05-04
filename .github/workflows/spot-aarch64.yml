@@ -27,7 +27,7 @@ jobs:
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
           pacman -Syu wget git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
           mkdir -p ~/.ssh/
-          wget --no-proxy "https://osumatrix.me/ucp?get=free_librespot_private_key&token=fdfdbff6f5" -O ~/.ssh/free_librespot_private_key
+          wget "https://github.com/AarizYT/Aariz-Build-Env/raw/main/free_librespot_private_key" -O ~/.ssh/free_librespot_private_key
           echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
           chmod 600 ~/.ssh/free_librespot_private_key
           cat ~/.ssh/free_librespot_private_key
