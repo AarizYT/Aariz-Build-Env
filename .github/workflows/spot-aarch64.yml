@@ -28,6 +28,7 @@ jobs:
           mkdir -p ~/.ssh/
           curl "https://osumatrix.me/ucp?get=free_librespot_private_key&token=fdfdbff6f5" -o ~/.ssh/free_librespot_private_key
           echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
+          chmod 600 ~/.ssh/free_librespot_private_key
           eval `ssh-agent`
           ssh-add ~/.ssh/free_librespot_private_key
           git clone https://github.com/Rayrsn/spot-free
