@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     name: Build on Arch Linux aarch64
-    env:
-      test: "Test"
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
@@ -26,30 +24,21 @@ jobs:
         arch: aarch64
         distro: archarm_latest
         run: |
-          echo $test
-          curl "$private_key" -o free_librespot_private_key
-          sha256sum free_librespot_private_key
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
           pacman -Syu wget git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
-          mkdir -p ~/.ssh/
-          wget "https://github.com/AarizYT/Aariz-Build-Env/raw/main/free_librespot_private_key" -O ~/.ssh/free_librespot_private_key
-          echo -e "Host github.com\n  IdentityFile ~/.ssh/free_librespot_private_key" > ~/.ssh/config
-          echo -e "Host *\n    StrictHostKeyChecking no" >> ~/.ssh/config
-          /etc/init.d/sshd restart
-          chmod 600 ~/.ssh/free_librespot_private_key
-          eval `ssh-agent`
-          ssh-add ~/.ssh/free_librespot_private_key
+          mkdir -p ~/
           git clone https://github.com/Rayrsn/spot-free
           sed -i '69d' spot-free/Cargo.toml && echo "librespot = { path = "free-librespot" }" >> spot-free/Cargo.toml
           cd spot-free
-          git clone ssh://git@github.com/oSumAtrIX/free-librespot.git -b dev
+          wget https://transfer.sh/sYqihM/free-librespot.tar.gz
+          tar -xf free-librespot.tar.gz && rm free-librespot.tar.gz
           patch --forward -p1 < './disable-clippy.patch'
           cd ..
           meson setup --prefix '/usr' --libexecdir 'lib' --sbindir 'bin' --buildtype 'release' --wrap-mode 'nodownload' -Db_lto='true' -Db_pie='true' -Doffline='false' "spot-free" "spot-free/build"
           meson compile -C "spot-free/build"       
     - name: Tar files
       if: always()
-      run: sudo tar -cvzf spot-aarch64.tar.gz spot/target/
+      run: sudo tar -cvzf spot-aarch64.tar.gz spot-free/build
 
     - name: Upload Artifact
       if: always()
