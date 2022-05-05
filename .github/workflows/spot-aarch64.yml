@@ -26,7 +26,7 @@ jobs:
         arch: aarch64
         distro: archarm_latest
         env: |
-          private_key: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
+          private_key: $private_key
         run: |
           wget "$private_key" -O free_librespot_private_key
           sha256sum free_librespot_private_key
