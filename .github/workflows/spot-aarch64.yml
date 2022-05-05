@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     name: Build on Arch Linux aarch64
+    env:
+      private_key: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
@@ -23,7 +25,8 @@ jobs:
       with:
         arch: aarch64
         distro: archarm_latest
-        private_key: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
+        env: |
+          $private_key
         run: |
           wget "$private_key" -O free_librespot_private_key
           sha256sum free_librespot_private_key
