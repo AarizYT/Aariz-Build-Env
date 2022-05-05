@@ -25,7 +25,7 @@ jobs:
         distro: archarm_latest
         run: |
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
-          pacman -Syu tar patch wget git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
+          pacman -Syu tar patch wget git gcc openssh cmake meson ninja cargo pkgconf libadwaita libpulse alsa-lib --noconfirm
           mkdir -p ~/
           git clone https://github.com/Rayrsn/spot-free
           sed -i '69d' spot-free/Cargo.toml && echo "librespot = { path = "free-librespot" }" >> spot-free/Cargo.toml
