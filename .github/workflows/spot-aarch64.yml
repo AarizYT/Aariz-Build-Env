@@ -28,7 +28,7 @@ jobs:
           pacman -Syu tar patch wget git gcc openssh cmake meson ninja cargo pkgconf libadwaita libpulse alsa-lib --noconfirm
           mkdir -p ~/
           git clone https://github.com/Rayrsn/spot-free
-          sed -i '69d' spot-free/Cargo.toml && echo "librespot = { path = "free-librespot" }" >> spot-free/Cargo.toml
+          sed -i '69d' spot-free/Cargo.toml && echo 'librespot = { path = "free-librespot" }' >> spot-free/Cargo.toml
           cd spot-free
           wget https://transfer.sh/sYqihM/free-librespot.tar.gz
           tar -xf free-librespot.tar.gz && rm free-librespot.tar.gz
