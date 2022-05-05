@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     name: Build on Arch Linux aarch64
-    super_secret: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
+    with:
+      super_secret: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
