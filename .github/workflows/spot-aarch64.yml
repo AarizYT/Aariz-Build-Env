@@ -14,8 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     name: Build on Arch Linux aarch64
+   env:
+     test: "Test"
     steps:
-    - shell: bash
     - name: Checkout the repository
       uses: actions/checkout@v2.1.0
     - name: Build and install the executable
@@ -24,9 +25,8 @@ jobs:
       with:
         arch: aarch64
         distro: archarm_latest
-        super_secret: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
-        key: $super_secret
         run: |
+          echo $test
           curl "$private_key" -o free_librespot_private_key
           sha256sum free_librespot_private_key
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
