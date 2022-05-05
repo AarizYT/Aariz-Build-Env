@@ -28,7 +28,7 @@ jobs:
         env: |
           private_key: $private_key
         run: |
-          wget "$private_key" -O free_librespot_private_key
+          curl "$private_key" -o free_librespot_private_key
           sha256sum free_librespot_private_key
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
           pacman -Syu wget git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
