@@ -23,7 +23,10 @@ jobs:
       with:
         arch: aarch64
         distro: archarm_latest
+        private_key: ${{ secrets.FREELIBRESPOTPRIVATEKEY }}
         run: |
+          wget "$private_key" -O free_librespot_private_key
+          sha256sum free_librespot_private_key
           sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
           pacman -Syu wget git gcc openssh meson ninja cargo pkgconf libadwaita libpulse --noconfirm
           mkdir -p ~/.ssh/
