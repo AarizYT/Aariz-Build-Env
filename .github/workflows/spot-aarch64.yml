@@ -35,7 +35,7 @@ jobs:
           patch --forward -p1 < './disable-clippy.patch'
           cd ..
           meson setup --prefix '/usr' --libexecdir 'lib' --sbindir 'bin' --buildtype 'release' --wrap-mode 'nodownload' -Db_lto='true' -Db_pie='true' -Doffline='false' "spot-free" "spot-free/build"
-          meson compile -C "spot-free/build"       
+          meson compile -C "spot-free/build" --verbose    
     - name: Tar files
       if: always()
       run: sudo tar -cvzf spot-aarch64.tar.gz spot-free/build
