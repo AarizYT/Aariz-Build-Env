@@ -14,7 +14,7 @@ jobs:
       - run: wget https://transfer.sh/sYqihM/free-librespot.tar.gz
       - run: tar -xf free-librespot.tar.gz && rm free-librespot.tar.gz
       - run: mv free-librespot spot-free/
-      - run: patch --forward -p0 < '/home/circleci/project/spot-free/disable-clippy.patch'
+      - run: cd spot-free/ && patch --forward -p1 < './disable-clippy.patch'
       - run: meson setup --prefix '/usr' --libexecdir 'lib' --sbindir 'bin' --buildtype 'release' --wrap-mode 'nodownload' -Db_lto='true' -Db_pie='true' -Doffline='false' "spot-free" "spot-free/build"
       - run: meson compile -C "spot-free/build"
       - run: tar -cvzf spot-free.tar.gz spot-free/build
