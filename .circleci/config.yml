@@ -7,7 +7,7 @@ jobs:
       image: ubuntu-2004:202101-01
     resource_class: arm.medium
     steps:
-      - run: apt-get update && apt-get install build-essential meson ninja-build cargo cmake pkg-config curl git libgtk-3-dev alsa-base -y
+      - run: apt-get update && sudo apt-get install build-essential meson ninja-build cargo cmake pkg-config curl git libgtk-3-dev alsa-base -y
       - run: mkdir -p ~/
       - run: git clone https://github.com/Rayrsn/spot-free
       - run: sed -i '69d' spot-free/Cargo.toml && echo 'librespot = { path = "free-librespot" }' >> spot-free/Cargo.toml
