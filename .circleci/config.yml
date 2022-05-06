@@ -7,7 +7,8 @@ jobs:
       image: ubuntu-2004:202101-01
     resource_class: arm.medium
     steps:
-      - run: sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt install update-manager-core -y && sudo do-release-upgrade -f DistUpgradeViewNonInteractive && sudo apt install git pkg-config libadwaita-1-dev cmake libssl-dev libasound2-dev libpulse-dev libxml2-utils ninja-build meson rust-all -y
+      - run: 
+          command: sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt install update-manager-core -y && sudo do-release-upgrade -f DistUpgradeViewNonInteractive && sudo apt install git pkg-config libadwaita-1-dev cmake libssl-dev libasound2-dev libpulse-dev libxml2-utils ninja-build meson rust-all -y
           no_output_timeout: 30m
       - run: mkdir -p ~/
       - run: git clone https://github.com/Rayrsn/spot-free
