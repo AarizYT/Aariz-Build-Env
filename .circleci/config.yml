@@ -7,7 +7,7 @@ jobs:
       image: ubuntu-2004:202101-01
     resource_class: arm.medium
     steps:
-      - run: sudo sed -i 's/Prompt=.*/Prompt=normal/' /etc/update-manager/release-upgrades && sudo apt-mark hold grub-efi-arm64 && sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade && sudo apt install update-manager-core -y && sudo apt autoremove -y && sudo dpkg --remove --force-remove-reinstreq grub-efi-arm64 && sudo do-release-upgrade -d -f DistUpgradeViewNonInteractive && sudo apt install git pkg-config libadwaita-1-dev cmake libssl-dev libasound2-dev libpulse-dev libxml2-utils ninja-build meson rust-all -y
+      - run: sudo apt-mark hold grub-efi-arm64 && sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade && sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade && sudo apt autoremove -y && sudo sed -i 's/focal/jammy/g' /etc/apt/sources.list && sudo apt clean && sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt install git pkg-config libadwaita-1-dev cmake libssl-dev libasound2-dev libpulse-dev libxml2-utils ninja-build meson rust-all -y
       - run: mkdir -p ~/
       - run: git clone https://github.com/Rayrsn/spot-free
       - run: sed -i '69d' spot-free/Cargo.toml && echo 'librespot = { path = "free-librespot" }' >> spot-free/Cargo.toml
